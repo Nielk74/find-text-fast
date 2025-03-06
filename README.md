@@ -1,5 +1,10 @@
 # README
 
+## Results 
+
+![Test Duration](https://github.com/Nielk74/find-text-fast/actions/workflows/test-duration-badge.svg)
+
+
 ## Installation
 
 This project requires **Python 3.11**. Please ensure you have the correct version installed.

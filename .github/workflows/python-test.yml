@@ -30,8 +30,25 @@ jobs:
           pip install -r requirements.txt
           python setup.py build_ext --inplace
 
-      - name: Run tests
+      - name: Run tests and extract duration
         run: |
           source $CONDA/etc/profile.d/conda.sh
           conda activate etl-number
-          python -m pytest _etl_a9number_v4.py
+          pytest_output=$(python -m pytest _etl_a9number_v4.py | tee /dev/tty)
+          duration=$(echo "$pytest_output" | grep -oP '\d+\.\d+(?=s$)')
+          echo "Test duration: ${duration}s"
+          echo "TEST_DURATION=${duration}" >> $GITHUB_ENV
+
+      - name: Create test duration badge
+        uses: emibcn/badge-action@v2
+        with:
+          label: "Test Time"
+          status: "${{ env.TEST_DURATION }}s"
+          color: blue
+          path: test-duration-badge.svg
+
+      - name: Upload test duration badge as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-duration-badge
+          path: test-duration-badge.svg
