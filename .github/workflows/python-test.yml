@@ -22,13 +22,11 @@ jobs:
           activate-environment: etl-number
           python-version: 3.11
           auto-activate-base: false
-          miniforge-variant: Mambaforge
-          use-mamba: true
 
       - name: Install dependencies
         run: |
           source $CONDA/etc/profile.d/conda.sh
-          conda activate etl-number
+          conda activate etl-number || conda create --name etl-number python=3.11 -y && conda activate etl-number
           pip install -r requirements.txt
           python setup.py build_ext --inplace
 
