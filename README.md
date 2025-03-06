@@ -4,7 +4,7 @@
 
 [![CI/CD Pipeline](https://github.com/Nielk74/find-text-fast/actions/workflows/python-test.yml/badge.svg)](https://github.com/Nielk74/find-text-fast/actions/workflows/python-test.yml)
 
-![Test Duration](https://img.shields.io/badge/Test%20Time- 1.12s-blue.svg)
+![Test Duration](https://img.shields.io/badge/Test%20Time-1.12s-blue.svg)
 
 
 
