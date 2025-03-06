@@ -34,7 +34,7 @@ jobs:
         run: |
           source $CONDA/etc/profile.d/conda.sh
           conda activate etl-number
-          pytest_output=$(python -m pytest _etl_a9number_v4.py | tee /dev/tty)
+          pytest_output=$(python -m pytest _etl_a9number_v4.py)
           duration=$(echo "$pytest_output" | grep -oP '\d+\.\d+(?=s$)')
           echo "Test duration: ${duration}s"
           echo "TEST_DURATION=${duration}" >> $GITHUB_ENV
