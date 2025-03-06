@@ -1,0 +1,39 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Conda environment
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: etl-number
+          python-version: 3.11
+          auto-activate-base: false
+          miniforge-variant: Mambaforge
+          use-mamba: true
+
+      - name: Install dependencies
+        run: |
+          source $CONDA/etc/profile.d/conda.sh
+          conda activate etl-number
+          pip install -r requirements.txt
+          python setup.py build_ext --inplace
+
+      - name: Run tests
+        run: |
+          source $CONDA/etc/profile.d/conda.sh
+          conda activate etl-number
+          python -m pytest _etl_a9number_v4.py
